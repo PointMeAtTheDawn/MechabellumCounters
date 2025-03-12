@@ -9,6 +9,7 @@ image_folder = os.path.join(os.getcwd(), "images")
 unit_images = {
     "Crawler": "crawler.jpg",
     "Fang": "fang.jpg",
+    "Hound": "hound.jpg",
     "Marksman": "marksman.jpg",
     "Arclight": "arclight.jpg",
     "Wasp": "wasp.jpg",
@@ -17,6 +18,9 @@ unit_images = {
     "Steelballs": "steelball.jpg",
     "Stormcaller": "stormcaller.jpg",
     "Phoenix": "phoenix.jpg",
+    "Phantom Ray": "phantom_ray.jpg",
+    "Tarantula": "tarantula.jpg",
+    "Sabertooth": "sabertooth.jpg",
     "Rhino": "rhino.jpg",
     "Hacker": "hacker.jpg",
     "Wraith": "wraith.jpg",
@@ -24,16 +28,13 @@ unit_images = {
     "Vulcan": "vulcan.jpg",
     "Fortress": "fortress.jpg",
     "Melting Point": "melting_point.jpg",
-    "Overlord": "overlord.jpg",
     "Sandworm": "sandworm.jpg",
+    "Raiden": "raiden.jpg",
+    "Overlord": "overlord.jpg",
     "War Factory": "war_factory.jpg",
     "Fire Badger": "fire_badger.jpg",
     "Typhoon": "typhoon.jpg",
-    "Sabertooth": "sabertooth.jpg",
-    "Tarantula": "tarantula.jpg",
     "Farseer": "farseer.jpg",
-    "Phantom Ray": "phantom_ray.jpg",
-    "Raiden": "raiden.jpg",
 }
 
 # Matrix key
@@ -41,794 +42,851 @@ unit_images = {
 # A = 5 # unit wins, 60-95% HP left
 # B = 4 # unit wins, 10-60% HP left
 # C = 3 # unit wins, <10% HP left
-# D = 2 # unit lose, Opponent <10% HP left
-# E = 1 # unit lose, Opponent 10-50% HP left
-# F = 0 # unit lose, Opponent >50% HP left
+# / = 2 mirror match
+# D = 1 # unit lose, Opponent 10-50% HP left
+# E = 0 # unit lose, Opponent >50% HP left
 # Load unit matrix and overrides into Pandas DataFrames
 unit_matrix_data = {
     # Add the matrix data for counters here as columns
     "Crawler": [
-        2,
-        5,
-        5,
-        0,
-        0,
-        4,
-        1,
-        4,
-        4,
-        0,
-        4,
-        5,
-        0,
-        1,
-        0,
-        1,
-        4,
-        0,
-        1,
-        0,
-        0,
-        0,
-        4,
-        0,
-        0,
-        0,
-        0,
+        2, # Crawler
+        4, # Fang
+        1, # Hound
+        5, # Marksman
+        0, # Arclight
+        0, # Wasp
+        5, # Mustang
+        1, # Sledgehammer
+        5, # Steelballs
+        5, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        1, # Tarantula
+        4, # Sabertooth
+        1, # Rhino
+        5, # Hacker
+        0, # Wraith
+        3, # Scorpion
+        0, # Vulcan
+        5, # Fortress
+        5, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        0, # Fire Badger
+        1, # Typhoon
+        1, # Farseer
     ],
     "Fang": [
-        1,
-        2,
-        5,
-        0,
-        5,
-        0,
-        0,
-        4,
-        0,
-        5,
-        2,
-        5,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        2,
-        0,
-        0,
-        4,
-        4,
+        1, # Crawler
+        2, # Fang
+        1, # Hound
+        5, # Marksman
+        0, # Arclight
+        4, # Wasp
+        1, # Mustang
+        0, # Sledgehammer
+        3, # Steelballs
+        0, # Stormcaller
+        5, # Phoenix
+        4, # Phantom Ray
+        1, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        5, # Hacker
+        0, # Wraith
+        0, # Scorpion
+        0, # Vulcan
+        3, # Fortress
+        4, # Melting Point
+        1, # Sandworm
+        4, # Raiden
+        4, # Overlord
+        1, # War Factory
+        0, # Fire Badger
+        0, # Typhoon
+        1, # Farseer
+    ],
+    "Hound": [
+        5, # Crawler
+        5, # Fang
+        2, # Hound
+        1, # Marksman
+        1, # Arclight
+        0, # Wasp
+        3, # Mustang
+        1, # Sledgehammer
+        1, # Steelballs
+        4, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        1, # Tarantula
+        3, # Sabertooth
+        1, # Rhino
+        1, # Hacker
+        0, # Wraith
+        1, # Scorpion
+        1, # Vulcan
+        1, # Fortress
+        3, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        1, # Fire Badger
+        1, # Typhoon
+        1, # Farseer
     ],
     "Marksman": [
-        0,
-        0,
-        2,
-        6,
-        1,
-        0,
-        2,
-        3,
-        1,
-        4,
-        2,
-        6,
-        3,
-        0,
-        0,
-        0,
-        0,
-        0,
-        6,
-        0,
-        5,
-        1,
-        1,
-        4,
-        1,
-        2,
-        0,
+        1, # Crawler
+        1, # Fang
+        4, # Hound
+        2, # Marksman
+        6, # Arclight
+        1, # Wasp
+        1, # Mustang
+        1, # Sledgehammer
+        1, # Steelballs
+        1, # Stormcaller
+        5, # Phoenix
+        1, # Phantom Ray
+        4, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        6, # Hacker
+        5, # Wraith
+        3, # Scorpion
+        4, # Vulcan
+        1, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        1, # Raiden
+        5, # Overlord
+        1, # War Factory
+        5, # Fire Badger
+        3, # Typhoon
+        1, # Farseer
     ],
     "Arclight": [
-        6,
-        6,
-        0,
-        2,
-        6,
-        5,
-        0,
-        0,
-        0,
-        1,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
+        6, # Crawler
+        6, # Fang
+        4, # Hound
+        0, # Marksman
+        2, # Arclight
+        0, # Wasp
+        6, # Mustang
+        1, # Sledgehammer
+        1, # Steelballs
+        0, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        1, # Tarantula
+        1, # Sabertooth
+        0, # Rhino
+        0, # Hacker
+        0, # Wraith
+        0, # Scorpion
+        1, # Vulcan
+        0, # Fortress
+        0, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        0, # War Factory
+        1, # Fire Badger
+        1, # Typhoon
+        1, # Farseer
     ],
     "Wasp": [
-        6,
-        0,
-        4,
-        0,
-        2,
-        0,
-        6,
-        6,
-        6,
-        5,
-        6,
-        6,
-        1,
-        6,
-        6,
-        0,
-        4,
-        4,
-        1,
-        6,
-        6,
-        0,
-        6,
-        0,
-        0,
-        5,
-        5,
+        6, # Crawler
+        1, # Fang
+        6, # Hound
+        3, # Marksman
+        6, # Arclight
+        2, # Wasp
+        1, # Mustang
+        6, # Sledgehammer
+        6, # Steelballs
+        6, # Stormcaller
+        4, # Phoenix
+        1, # Phantom Ray
+        6, # Tarantula
+        6, # Sabertooth
+        5, # Rhino
+        6, # Hacker
+        0, # Wraith
+        5, # Scorpion
+        5, # Vulcan
+        5, # Fortress
+        4, # Melting Point
+        6, # Sandworm
+        4, # Raiden
+        4, # Overlord
+        5, # War Factory
+        6, # Fire Badger
+        1, # Typhoon
+        1, # Farseer
     ],
     "Mustang": [
-        1,
-        4,
-        5,
-        0,
-        6,
-        2,
-        0,
-        0,
-        4,
-        5,
-        1,
-        5,
-        2,
-        0,
-        0,
-        1,
-        4,
-        4,
-        1,
-        0,
-        0,
-        0,
-        2,
-        0,
-        0,
-        5,
-        5,
+        1, # Crawler
+        4, # Fang
+        1, # Hound
+        4, # Marksman
+        0, # Arclight
+        4, # Wasp
+        2, # Mustang
+        0, # Sledgehammer
+        0, # Steelballs
+        3, # Stormcaller
+        5, # Phoenix
+        3, # Phantom Ray
+        1, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        4, # Hacker
+        1, # Wraith
+        1, # Scorpion
+        0, # Vulcan
+        1, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        4, # Raiden
+        4, # Overlord
+        1, # War Factory
+        1, # Fire Badger
+        1, # Typhoon
+        1, # Farseer
     ],
     "Sledgehammer": [
-        4,
-        5,
-        3,
-        5,
-        0,
-        5,
-        2,
-        0,
-        4,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        0,
-        1,
-        0,
-        0,
-        0,
-        1,
-        1,
-        1,
-        1,
-        0,
-        0,
-        0,
+        5, # Crawler
+        6, # Fang
+        4, # Hound
+        3, # Marksman
+        5, # Arclight
+        0, # Wasp
+        6, # Mustang
+        2, # Sledgehammer
+        1, # Steelballs
+        4, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        1, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        4, # Hacker
+        0, # Wraith
+        0, # Scorpion
+        1, # Vulcan
+        0, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        0, # War Factory
+        1, # Fire Badger
+        4, # Typhoon
+        1, # Farseer
     ],
     "Steelballs": [
-        1,
-        2,
-        0,
-        4,
-        0,
-        4,
-        5,
-        2,
-        6,
-        0,
-        5,
-        0,
-        0,
-        0,
-        4,
-        4,
-        4,
-        0,
-        5,
-        0,
-        4,
-        5,
-        0,
-        5,
-        0,
-        0,
-        0,
+        1, # Crawler
+        1, # Fang
+        4, # Hound
+        4, # Marksman
+        5, # Arclight
+        0, # Wasp
+        5, # Mustang
+        4, # Sledgehammer
+        2, # Steelballs
+        5, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        4, # Tarantula
+        1, # Sabertooth
+        5, # Rhino
+        0, # Hacker
+        0, # Wraith
+        1, # Scorpion
+        4, # Vulcan
+        3, # Fortress
+        4, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        4, # Fire Badger
+        5, # Typhoon
+        3, # Farseer
     ],
     "Stormcaller": [
-        1,
-        5,
-        4,
-        6,
-        0,
-        1,
-        1,
-        0,
-        2,
-        0,
-        0,
-        6,
-        0,
-        2,
-        5,
-        4,
-        5,
-        0,
-        0,
-        0,
-        0,
-        1,
-        4,
-        4,
-        1,
-        0,
-        0,
+        1, # Crawler
+        6, # Fang
+        1, # Hound
+        4, # Marksman
+        6, # Arclight
+        0, # Wasp
+        3, # Mustang
+        1, # Sledgehammer
+        1, # Steelballs
+        2, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        4, # Tarantula
+        4, # Sabertooth
+        0, # Rhino
+        6, # Hacker
+        0, # Wraith
+        6, # Scorpion
+        5, # Vulcan
+        4, # Fortress
+        5, # Melting Point
+        0, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        1, # Fire Badger
+        5, # Typhoon
+        1, # Farseer
     ],
     "Phoenix": [
-        6,
-        0,
-        1,
-        4,
-        0,
-        0,
-        6,
-        6,
-        6,
-        2,
-        6,
-        6,
-        3,
-        6,
-        6,
-        0,
-        1,
-        0,
-        0,
-        6,
-        6,
-        0,
-        6,
-        2,
-        1,
-        1,
-        1,
-    ],
-    "Rhino": [
-        1,
-        3,
-        3,
-        5,
-        4,
-        0,
-        5,
-        0,
-        6,
-        0,
-        2,
-        6,
-        0,
-        0,
-        4,
-        1,
-        0,
-        0,
-        2,
-        0,
-        5,
-        4,
-        4,
-        3,
-        4,
-        0,
-        0,
-    ],
-    "Hacker": [
-        0,
-        0,
-        0,
-        4,
-        0,
-        0,
-        4,
-        6,
-        0,
-        0,
-        0,
-        2,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        6,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-    ],
-    "Wraith": [
-        6,
-        5,
-        2,
-        4,
-        4,
-        3,
-        6,
-        6,
-        6,
-        2,
-        6,
-        6,
-        2,
-        6,
-        6,
-        0,
-        0,
-        0,
-        0,
-        6,
-        6,
-        0,
-        6,
-        2,
-        0,
-        1,
-        0,
-    ],
-    "Scorpion": [
-        4,
-        6,
-        4,
-        6,
-        0,
-        5,
-        6,
-        6,
-        3,
-        0,
-        6,
-        6,
-        0,
-        2,
-        4,
-        0,
-        0,
-        0,
-        0,
-        0,
-        6,
-        6,
-        4,
-        6,
-        4,
-        0,
-        0,
-    ],
-    "Vulcan": [
-        6,
-        6,
-        5,
-        6,
-        0,
-        6,
-        4,
-        1,
-        0,
-        0,
-        1,
-        6,
-        0,
-        1,
-        2,
-        0,
-        0,
-        0,
-        0,
-        0,
-        6,
-        5,
-        1,
-        4,
-        4,
-        0,
-        0,
-    ],
-    "Fortress": [
-        4,
-        5,
-        5,
-        6,
-        5,
-        4,
-        5,
-        1,
-        1,
-        4,
-        4,
-        6,
-        5,
-        4,
-        5,
-        2,
-        0,
-        1,
-        3,
-        0,
-        6,
-        6,
-        4,
-        5,
-        5,
-        1,
-        4,
-    ],
-    "Melting Point": [
-        1,
-        5,
-        5,
-        6,
-        1,
-        1,
-        4,
-        1,
-        0,
-        4,
-        5,
-        6,
-        6,
-        4,
-        6,
-        4,
-        2,
-        4,
-        4,
-        4,
-        5,
-        6,
-        4,
-        6,
-        5,
-        4,
-        5,
-    ],
-    "Overlord": [
-        6,
-        5,
-        5,
-        6,
-        1,
-        1,
-        6,
-        6,
-        6,
-        4,
-        6,
-        6,
-        6,
-        6,
-        6,
-        4,
-        1,
-        2,
-        2,
-        6,
-        6,
-        4,
-        6,
-        6,
-        5,
-        5,
-        5,
-    ],
-    "Sandworm": [
-        4,
-        5,
-        6,
-        6,
-        4,
-        4,
-        5,
-        0,
-        6,
-        5,
-        3,
-        6,
-        5,
-        4,
-        5,
-        2,
-        0,
-        3,
-        2,
-        1,
-        5,
-        6,
-        4,
-        5,
-        6,
-        4,
-        6,
-    ],
-    "War Factory": [
-        6,
-        6,
-        5,
-        6,
-        0,
-        6,
-        6,
-        6,
-        4,
-        0,
-        6,
-        6,
-        0,
-        5,
-        5,
-        4,
-        1,
-        0,
-        4,
-        2,
-        6,
-        6,
-        5,
-        6,
-        5,
-        0,
-        0,
-    ],
-    "Fire Badger": [
-        6,
-        5,
-        0,
-        4,
-        0,
-        5,
-        4,
-        0,
-        5,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        2,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-    ],
-    "Typhoon": [
-        6,
-        6,
-        4,
-        4,
-        6,
-        6,
-        4,
-        0,
-        4,
-        5,
-        0,
-        4,
-        5,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        4,
-        2,
-        0,
-        3,
-        1,
-        5,
-        1,
-    ],
-    "Sabertooth": [
-        0,
-        3,
-        4,
-        6,
-        0,
-        3,
-        4,
-        5,
-        1,
-        0,
-        5,
-        6,
-        0,
-        1,
-        4,
-        1,
-        1,
-        0,
-        1,
-        0,
-        6,
-        4,
-        2,
-        5,
-        4,
-        0,
-        0,
-    ],
-    "Tarantula": [
-        6,
-        6,
-        1,
-        4,
-        6,
-        5,
-        4,
-        0,
-        1,
-        3,
-        0,
-        6,
-        3,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        0,
-        4,
-        2,
-        0,
-        2,
-        1,
-        3,
-        0,
-    ],
-    "Farseer": [
-        6,
-        6,
-        4,
-        6,
-        6,
-        6,
-        5,
-        4,
-        4,
-        4,
-        1,
-        6,
-        4,
-        1,
-        1,
-        0,
-        0,
-        0,
-        0,
-        0,
-        5,
-        4,
-        1,
-        4,
-        2,
-        5,
-        2,
+        6, # Crawler
+        0, # Fang
+        6, # Hound
+        1, # Marksman
+        6, # Arclight
+        1, # Wasp
+        1, # Mustang
+        6, # Sledgehammer
+        5, # Steelballs
+        6, # Stormcaller
+        2, # Phoenix
+        1, # Phantom Ray
+        6, # Tarantula
+        6, # Sabertooth
+        6, # Rhino
+        6, # Hacker
+        5, # Wraith
+        6, # Scorpion
+        6, # Vulcan
+        6, # Fortress
+        1, # Melting Point
+        6, # Sandworm
+        1, # Raiden
+        4, # Overlord
+        5, # War Factory
+        6, # Fire Badger
+        4, # Typhoon
+        1, # Farseer
     ],
     "Phantom Ray": [
-        6,
-        0,
-        2,
-        4,
-        0,
-        0,
-        6,
-        6,
-        6,
-        4,
-        6,
-        6,
-        4,
-        6,
-        6,
-        4,
-        1,
-        0,
-        1,
-        6,
-        6,
-        0,
-        6,
-        2,
-        0,
-        2,
-        0,
+        5, # Crawler
+        1, # Fang
+        6, # Hound
+        3, # Marksman
+        6, # Arclight
+        3, # Wasp
+        1, # Mustang
+        6, # Sledgehammer
+        6, # Steelballs
+        6, # Stormcaller
+        3, # Phoenix
+        2, # Phantom Ray
+        6, # Tarantula
+        6, # Sabertooth
+        6, # Rhino
+        6, # Hacker
+        5, # Wraith
+        6, # Scorpion
+        6, # Vulcan
+        6, # Fortress
+        1, # Melting Point
+        6, # Sandworm
+        1, # Raiden
+        3, # Overlord
+        5, # War Factory
+        6, # Fire Badger
+        4, # Typhoon
+        1, # Farseer
+    ],
+    "Tarantula": [
+        5, # Crawler
+        5, # Fang
+        4, # Hound
+        1, # Marksman
+        4, # Arclight
+        0, # Wasp
+        4, # Mustang
+        4, # Sledgehammer
+        1, # Steelballs
+        1, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        2, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        3, # Hacker
+        0, # Wraith
+        1, # Scorpion
+        4, # Vulcan
+        1, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        4, # Fire Badger
+        5, # Typhoon
+        1, # Farseer
+    ],
+    "Sabertooth": [
+        1, # Crawler
+        3, # Fang
+        1, # Hound
+        3, # Marksman
+        5, # Arclight
+        0, # Wasp
+        4, # Mustang
+        4, # Sledgehammer
+        5, # Steelballs
+        1, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        5, # Tarantula
+        2, # Sabertooth
+        4, # Rhino
+        5, # Hacker
+        0, # Wraith
+        4, # Scorpion
+        5, # Vulcan
+        1, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        5, # Fire Badger
+        5, # Typhoon
+        5, # Farseer
+    ],
+    "Rhino": [
+        3, # Crawler
+        3, # Fang
+        4, # Hound
+        3, # Marksman
+        6, # Arclight
+        0, # Wasp
+        4, # Mustang
+        4, # Sledgehammer
+        1, # Steelballs
+        6, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        4, # Tarantula
+        1, # Sabertooth
+        2, # Rhino
+        5, # Hacker
+        0, # Wraith
+        5, # Scorpion
+        5, # Vulcan
+        1, # Fortress
+        0, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        0, # War Factory
+        5, # Fire Badger
+        5, # Typhoon
+        5, # Farseer
+    ],
+    "Hacker": [
+        1, # Crawler
+        0, # Fang
+        3, # Hound
+        0, # Marksman
+        6, # Arclight
+        0, # Wasp
+        1, # Mustang
+        1, # Sledgehammer
+        6, # Steelballs
+        0, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        1, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        2, # Hacker
+        0, # Wraith
+        1, # Scorpion
+        1, # Vulcan
+        0, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        0, # War Factory
+        5, # Fire Badger
+        5, # Typhoon
+        1, # Farseer
+    ],
+    "Wraith": [
+        6, # Crawler
+        4, # Fang
+        6, # Hound
+        1, # Marksman
+        6, # Arclight
+        6, # Wasp
+        4, # Mustang
+        5, # Sledgehammer
+        5, # Steelballs
+        6, # Stormcaller
+        1, # Phoenix
+        1, # Phantom Ray
+        5, # Tarantula
+        5, # Sabertooth
+        5, # Rhino
+        6, # Hacker
+        2, # Wraith
+        5, # Scorpion
+        5, # Vulcan
+        5, # Fortress
+        0, # Melting Point
+        5, # Sandworm
+        1, # Raiden
+        1, # Overlord
+        5, # War Factory
+        6, # Fire Badger
+        1, # Typhoon
+        1, # Farseer
+    ],
+    "Scorpion": [
+        1, # Crawler
+        6, # Fang
+        5, # Hound
+        1, # Marksman
+        5, # Arclight
+        0, # Wasp
+        5, # Mustang
+        5, # Sledgehammer
+        6, # Steelballs
+        1, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        4, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        5, # Hacker
+        0, # Wraith
+        2, # Scorpion
+        6, # Vulcan
+        1, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        6, # Fire Badger
+        6, # Typhoon
+        4, # Farseer
+    ],
+    "Vulcan": [
+        6, # Crawler
+        6, # Fang
+        5, # Hound
+        1, # Marksman
+        4, # Arclight
+        0, # Wasp
+        6, # Mustang
+        4, # Sledgehammer
+        1, # Steelballs
+        1, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        1, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        3, # Hacker
+        0, # Wraith
+        1, # Scorpion
+        2, # Vulcan
+        1, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        5, # Fire Badger
+        4, # Typhoon
+        1, # Farseer
+    ],
+    "Fortress": [
+        1, # Crawler
+        1, # Fang
+        3, # Hound
+        4, # Marksman
+        6, # Arclight
+        0, # Wasp
+        3, # Mustang
+        5, # Sledgehammer
+        1, # Steelballs
+        1, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        5, # Tarantula
+        3, # Sabertooth
+        5, # Rhino
+        6, # Hacker
+        0, # Wraith
+        4, # Scorpion
+        5, # Vulcan
+        2, # Fortress
+        0, # Melting Point
+        1, # Sandworm
+        1, # Raiden
+        0, # Overlord
+        1, # War Factory
+        6, # Fire Badger
+        5, # Typhoon
+        5, # Farseer
+    ],
+    "Melting Point": [
+        1, # Crawler
+        1, # Fang
+        1, # Hound
+        3, # Marksman
+        5, # Arclight
+        1, # Wasp
+        3, # Mustang
+        4, # Sledgehammer
+        1, # Steelballs
+        1, # Stormcaller
+        4, # Phoenix
+        4, # Phantom Ray
+        5, # Tarantula
+        4, # Sabertooth
+        6, # Rhino
+        6, # Hacker
+        6, # Wraith
+        5, # Scorpion
+        6, # Vulcan
+        6, # Fortress
+        2, # Melting Point
+        4, # Sandworm
+        5, # Raiden
+        4, # Overlord
+        4, # War Factory
+        5, # Fire Badger
+        5, # Typhoon
+        5, # Farseer
+    ],
+    "Sandworm": [
+        4, # Crawler
+        4, # Fang
+        4, # Hound
+        6, # Marksman
+        6, # Arclight
+        0, # Wasp
+        4, # Mustang
+        5, # Sledgehammer
+        1, # Steelballs
+        6, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        4, # Tarantula
+        4, # Sabertooth
+        3, # Rhino
+        5, # Hacker
+        0, # Wraith
+        4, # Scorpion
+        5, # Vulcan
+        3, # Fortress
+        1, # Melting Point
+        2, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        1, # War Factory
+        6, # Fire Badger
+        5, # Typhoon
+        5, # Farseer
     ],
     "Raiden": [
-        6,
-        1,
-        5,
-        6,
-        0,
-        0,
-        6,
-        6,
-        6,
-        4,
-        6,
-        6,
-        5,
-        6,
-        6,
-        1,
-        0,
-        0,
-        0,
-        6,
-        6,
-        4,
-        6,
-        4,
-        3,
-        5,
-        2,
+        6, # Crawler
+        1, # Fang
+        6, # Hound
+        3, # Marksman
+        6, # Arclight
+        1, # Wasp
+        1, # Mustang
+        6, # Sledgehammer
+        6, # Steelballs
+        6, # Stormcaller
+        5, # Phoenix
+        5, # Phantom Ray
+        6, # Tarantula
+        6, # Sabertooth
+        6, # Rhino
+        6, # Hacker
+        6, # Wraith
+        6, # Scorpion
+        6, # Vulcan
+        6, # Fortress
+        1, # Melting Point
+        4, # Sandworm
+        2, # Raiden
+        1, # Overlord
+        6, # War Factory
+        6, # Fire Badger
+        5, # Typhoon
+        4, # Farseer
+    ],
+    "Overlord": [
+        6, # Crawler
+        1, # Fang
+        6, # Hound
+        1, # Marksman
+        6, # Arclight
+        1, # Wasp
+        1, # Mustang
+        6, # Sledgehammer
+        6, # Steelballs
+        6, # Stormcaller
+        1, # Phoenix
+        1, # Phantom Ray
+        6, # Tarantula
+        6, # Sabertooth
+        6, # Rhino
+        6, # Hacker
+        6, # Wraith
+        6, # Scorpion
+        6, # Vulcan
+        6, # Fortress
+        1, # Melting Point
+        6, # Sandworm
+        4, # Raiden
+        2, # Overlord
+        6, # War Factory
+        6, # Fire Badger
+        5, # Typhoon
+        5, # Farseer
+    ],
+    "War Factory": [
+        4, # Crawler
+        5, # Fang
+        5, # Hound
+        5, # Marksman
+        6, # Arclight
+        0, # Wasp
+        5, # Mustang
+        6, # Sledgehammer
+        5, # Steelballs
+        4, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        6, # Tarantula
+        5, # Sabertooth
+        5, # Rhino
+        1, # Hacker
+        0, # Wraith
+        5, # Scorpion
+        6, # Vulcan
+        4, # Fortress
+        1, # Melting Point
+        5, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        2, # War Factory
+        6, # Fire Badger
+        5, # Typhoon
+        5, # Farseer
+    ],
+    "Fire Badger": [
+        6, # Crawler
+        6, # Fang
+        4, # Hound
+        1, # Marksman
+        4, # Arclight
+        0, # Wasp
+        5, # Mustang
+        3, # Sledgehammer
+        1, # Steelballs
+        5, # Stormcaller
+        0, # Phoenix
+        0, # Phantom Ray
+        1, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        1, # Hacker
+        0, # Wraith
+        0, # Scorpion
+        1, # Vulcan
+        0, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        0, # Raiden
+        0, # Overlord
+        0, # War Factory
+        2, # Fire Badger
+        4, # Typhoon
+        1, # Farseer
+    ],
+    "Typhoon": [
+        5, # Crawler
+        6, # Fang
+        4, # Hound
+        1, # Marksman
+        3, # Arclight
+        6, # Wasp
+        4, # Mustang
+        1, # Sledgehammer
+        1, # Steelballs
+        1, # Stormcaller
+        1, # Phoenix
+        1, # Phantom Ray
+        4, # Tarantula
+        1, # Sabertooth
+        0, # Rhino
+        1, # Hacker
+        3, # Wraith
+        0, # Scorpion
+        1, # Vulcan
+        1, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        1, # Raiden
+        1, # Overlord
+        1, # War Factory
+        1, # Fire Badger
+        0, # Typhoon
+        1, # Farseer
+    ],
+    "Farseer": [
+        3, # Crawler
+        5, # Fang
+        5, # Hound
+        1, # Marksman
+        5, # Arclight
+        5, # Wasp
+        4, # Mustang
+        4, # Sledgehammer
+        1, # Steelballs
+        1, # Stormcaller
+        3, # Phoenix
+        3, # Phantom Ray
+        3, # Tarantula
+        1, # Sabertooth
+        1, # Rhino
+        4, # Hacker
+        5, # Wraith
+        1, # Scorpion
+        4, # Vulcan
+        1, # Fortress
+        1, # Melting Point
+        1, # Sandworm
+        1, # Raiden
+        1, # Overlord
+        1, # War Factory
+        4, # Fire Badger
+        3, # Typhoon
+        2, # Farseer
     ],
 }
 
